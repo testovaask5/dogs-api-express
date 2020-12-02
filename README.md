@@ -6,8 +6,10 @@
 
 Далее необходимо установить зависимости нашего приложения (установить express и nodemon):
 
-`cd dogs-api-express`
-`npm install`
+```sh
+cd dogs-api-express
+npm install
+```
 
 И затем запускаем наше приложение:
 
