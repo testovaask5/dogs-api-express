@@ -1,6 +1,10 @@
-const { DataTypes } = require('sequelize')
+const { DataTypes, Sequelize } = require('sequelize')
 
-module.exports = function(sequelize) {
+/**
+ * Init Dog model function
+ * @param {Sequelize} sequelize 
+ */
+function initDog(sequelize) {
     const DogModel = sequelize.define('Dog', {
         name: {
             type: DataTypes.STRING,
@@ -17,3 +21,7 @@ module.exports = function(sequelize) {
     }, {})
     return DogModel
 }
+
+console.log('Dog')
+
+module.exports = initDog

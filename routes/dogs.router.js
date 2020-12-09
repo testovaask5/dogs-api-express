@@ -1,6 +1,7 @@
+// @ts-check
 const express = require('express')
+const { Dog } = require('../models')
 const dogsRouter = express.Router()
-const { Dog, sequelize } = require('../models')
 
 // API http
 // routing

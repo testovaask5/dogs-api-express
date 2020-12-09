@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize')
+const Sequelize = require('sequelize').Sequelize
 const dogInitFunc = require('./Dog')
 
 const sequelize = new Sequelize('dogs', 'san', 'YOS6bi', {
