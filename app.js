@@ -1,4 +1,5 @@
 const fs = require('fs')
+const cors = require('cors')
 const express = require('express')
 const app = express()
 const dogsRouter = require('./routes/dogs.router')
@@ -17,6 +18,7 @@ const { sequelize } = require('./models');
 })()
 
 function main() {
+    app.use(cors())
     app.use(express.json())
     
     app.get('/', (req, res, next) => {
