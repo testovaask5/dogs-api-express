@@ -3,6 +3,8 @@ if (window.SSR) {
     header.textContent = 'Hello world'
     const divRoot = document.querySelector('#root')
     divRoot.append(header)
+    // window.finishRender()
+    finishRender()
 }
 
 document.querySelector('button').addEventListener('click', () => {

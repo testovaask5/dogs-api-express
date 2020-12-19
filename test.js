@@ -1,21 +1,33 @@
 // @ts-check
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
+// const jsdom = require("jsdom");
+const { JSDOM } = require("jsdom");
 const express = require('express')
 const app = express()
+const { EventEmitter } = require('events')
+class SSREmitter extends EventEmitter {}
 
-app.get('/', (req, res) => {
+function render(res) {
+    const renderEmmitter = new SSREmitter()
     JSDOM.fromFile("./test/index.html", {
         runScripts: 'dangerously',
         resources: 'usable',
         beforeParse: (window) => {
             window.SSR = true
+            window.finishRender = () => {
+                renderEmmitter.emit('finish')
+            }
         }
     }).then(dom => {
-        setTimeout(() => {
+        renderEmmitter.once('finish', () => {
             res.send(dom.serialize());
-        }, 50)
+        })
     });
+    return dom.serialize()
+}
+
+app.get('/', async (req, res, next) => {
+    const html = await render('/create')
+    res.send(html)
 })
 
 app.use(express.static('./test'))
